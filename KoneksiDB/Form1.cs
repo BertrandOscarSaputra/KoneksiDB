@@ -56,6 +56,7 @@ namespace KoneksiDB
                         {
                             FrmMain frmMain = new FrmMain();
                             frmMain.Show();
+                            this.Hide();
                         }
                         else
                         {
