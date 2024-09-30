@@ -23,7 +23,7 @@ namespace KoneksiDB
 
         public Form1()
         {
-            alamat = "server=localhost; database=projectmasterdb; username=root; password=;";
+            alamat = "server=localhost; database=projectmaster; username=root; password=;";
             koneksi = new MySqlConnection(alamat);
 
             InitializeComponent();

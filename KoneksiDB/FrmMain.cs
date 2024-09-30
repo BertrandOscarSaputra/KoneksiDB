@@ -21,7 +21,7 @@ namespace KoneksiDB
         private string alamat, query;
         public FrmMain()
         {
-            alamat = "server=localhost; database=projectmasterdb; username=root; password=;";
+            alamat = "server=localhost; database=projectmaster; username=root; password=;";
             koneksi = new MySqlConnection(alamat);
 
             InitializeComponent();
@@ -208,6 +208,17 @@ namespace KoneksiDB
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FrmPengguna frmPengguna = new FrmPengguna();
+            frmPengguna.Show();
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
