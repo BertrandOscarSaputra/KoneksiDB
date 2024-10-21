@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,8 +39,23 @@ namespace KoneksiDB
             {
                 if (txtUsername.Text != "" && txtPassword.Text != "" && txtNama.Text != "")
                 {
+                    // Tentukan folder tempat menyimpan gambar
+                    string folderPath = Path.Combine(Application.StartupPath, "C:\\Users\\Lenovo\\source\\repos\\KoneksiDB\\KoneksiDB\\foto");
 
-                    query = string.Format("insert into data_user  values ('{0}','{1}','{2}','{3}','{4}');", txtID.Text, txtUsername.Text, txtPassword.Text, txtNama.Text, CBLevel.Text);
+                    // Pastikan folder ada, jika tidak, buat folder
+                    if (!Directory.Exists(folderPath))
+                    {
+                        Directory.CreateDirectory(folderPath);
+                    }
+
+                    // Membuat nama unik untuk file gambar agar tidak tertimpa
+                    string fileName = Guid.NewGuid().ToString() + ".jpg";
+                    string filePath = Path.Combine(folderPath, fileName);
+
+                    // Simpan gambar dari PictureBox ke folder
+                    pictureBox1.Image.Save(filePath);
+
+                    query = string.Format("insert into data_user  values ('{0}','{1}','{2}','{3}','{4}', '{5}');", txtID.Text, txtUsername.Text, txtPassword.Text, txtNama.Text, CBLevel.Text, fileName);
 
 
                     koneksi.Open();
@@ -49,12 +65,12 @@ namespace KoneksiDB
                     koneksi.Close();
                     if (res == 1)
                     {
-                        MessageBox.Show("Insert Data Suksess ...");
+                        MessageBox.Show("Insert Data Sukses ...");
                         FrmMain_Load(null, null);
                     }
                     else
                     {
-                        MessageBox.Show("Gagal inser Data . . . ");
+                        MessageBox.Show("Gagal insert Data . . . ");
                     }
                 }
                 else
@@ -86,18 +102,34 @@ namespace KoneksiDB
                     {
                         foreach (DataRow kolom in ds.Tables[0].Rows)
                         {
-                            txtID.Text = kolom["id_pengguna"].ToString();
+                            txtID.Text = kolom["id_user"].ToString();
                             txtPassword.Text = kolom["password"].ToString();
                             txtNama.Text = kolom["nama_pengguna"].ToString();
                             CBLevel.Text = kolom["level"].ToString();
+                            string fileName = kolom["foto"].ToString();
+
+                            string folderPath = Path.Combine(Application.StartupPath, "C:\\Users\\Lenovo\\source\\repos\\KoneksiDB\\KoneksiDB\\foto");
+                            string filePath = Path.Combine(folderPath, fileName);
+
+                            // Cek apakah file foto ada
+                            if (File.Exists(filePath))
+                            {
+                                // Tampilkan gambar di PictureBox
+                                pictureBox1.Image = Image.FromFile(filePath);
+                                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                            }
+                            else
+                            {
+                                MessageBox.Show("File gambar tidak ditemukan.");
+                            }
 
                         }
-                        txtUsername.Enabled = false;
-                        dataGridView1.DataSource = ds.Tables[0];
+
+
                         btnSave.Enabled = false;
                         btnUpdate.Enabled = true;
                         btnDelete.Enabled = true;
-                        btnSearch.Enabled = false;
+
                         btnClear.Enabled = true;
                     }
                     else
@@ -131,8 +163,23 @@ namespace KoneksiDB
             {
                 if (txtPassword.Text != "" && txtNama.Text != "" && txtUsername.Text != "" && txtID.Text != "")
                 {
+                    // Tentukan folder tempat menyimpan gambar
+                    string folderPath = Path.Combine(Application.StartupPath, "C:\\Users\\Lenovo\\source\\repos\\KoneksiDB\\KoneksiDB\\foto");
 
-                    query = string.Format("update data_user set password = '{0}', nama_pengguna = '{1}', level = '{2}' where id_pengguna = '{3}'", txtPassword.Text, txtNama.Text, CBLevel.Text, txtID.Text);
+                    // Pastikan folder ada, jika tidak, buat folder
+                    if (!Directory.Exists(folderPath))
+                    {
+                        Directory.CreateDirectory(folderPath);
+                    }
+
+                    // Membuat nama unik untuk file gambar agar tidak tertimpa
+                    string fileName = Guid.NewGuid().ToString() + ".jpg";
+                    string filePath = Path.Combine(folderPath, fileName);
+
+                    // Simpan gambar dari PictureBox ke folder
+                    pictureBox1.Image.Save(filePath);
+
+                    query = string.Format("update data_user set password = '{0}', nama_pengguna = '{1}', level = '{2}', foto = '{3}' where id_user = '{4}'", txtPassword.Text, txtNama.Text, CBLevel.Text, fileName, txtID.Text);
 
 
                     koneksi.Open();
@@ -169,7 +216,7 @@ namespace KoneksiDB
                 {
                     if (MessageBox.Show("Anda Yakin Menghapus Data Ini ??", "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        query = string.Format("Delete from data_user where id_pengguna = '{0}'", txtID.Text);
+                        query = string.Format("Delete from data_user where id_user = '{0}'", txtID.Text);
                         ds.Clear();
                         koneksi.Open();
                         perintah = new MySqlCommand(query, koneksi);
@@ -258,16 +305,18 @@ namespace KoneksiDB
                 dataGridView1.Columns[4].Width = 120;
                 dataGridView1.Columns[4].HeaderText = "Level";
 
-                txtID.Clear();
-                txtNama.Clear();
-                txtPassword.Clear();
-                txtUsername.Clear();
-                txtID.Focus();
-                btnUpdate.Enabled = false;
-                btnDelete.Enabled = false;
-                btnClear.Enabled = false;
-                btnSave.Enabled = true;
-                btnSearch.Enabled = true;
+            txtID.Clear();
+            txtNama.Clear();
+            txtPassword.Clear();
+            txtUsername.Clear();
+            txtID.Focus();
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
+            btnClear.Enabled = false;
+            btnSave.Enabled = true;
+           
+            pictureBox1.Image = null;
+            LblFoto.Visible = true;
 
             }
             catch (Exception ex)
