@@ -46,7 +46,10 @@
             this.btnLogout = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.LblFoto = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -136,7 +139,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(519, 36);
+            this.btnSave.Location = new System.Drawing.Point(674, 36);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(74, 38);
             this.btnSave.TabIndex = 10;
@@ -146,7 +149,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(669, 36);
+            this.btnSearch.Location = new System.Drawing.Point(784, 36);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(74, 38);
             this.btnSearch.TabIndex = 11;
@@ -156,7 +159,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(519, 111);
+            this.btnUpdate.Location = new System.Drawing.Point(674, 111);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(74, 38);
             this.btnUpdate.TabIndex = 12;
@@ -166,7 +169,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(669, 111);
+            this.btnDelete.Location = new System.Drawing.Point(784, 111);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(74, 38);
             this.btnDelete.TabIndex = 13;
@@ -176,7 +179,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(519, 187);
+            this.btnClear.Location = new System.Drawing.Point(674, 187);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(74, 38);
             this.btnClear.TabIndex = 14;
@@ -186,7 +189,7 @@
             // 
             // btnLogout
             // 
-            this.btnLogout.Location = new System.Drawing.Point(669, 187);
+            this.btnLogout.Location = new System.Drawing.Point(784, 187);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(74, 38);
             this.btnLogout.TabIndex = 15;
@@ -207,7 +210,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(519, 258);
+            this.button1.Location = new System.Drawing.Point(674, 258);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 40);
             this.button1.TabIndex = 17;
@@ -215,11 +218,32 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(367, 36);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(243, 262);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 18;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // LblFoto
+            // 
+            this.LblFoto.AutoSize = true;
+            this.LblFoto.Location = new System.Drawing.Point(451, 159);
+            this.LblFoto.Name = "LblFoto";
+            this.LblFoto.Size = new System.Drawing.Size(74, 20);
+            this.LblFoto.TabIndex = 19;
+            this.LblFoto.Text = "Pilih Foto";
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(900, 564);
+            this.Controls.Add(this.LblFoto);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnLogout);
@@ -243,6 +267,7 @@
             this.Text = "v";
             this.Load += new System.EventHandler(this.FrmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -268,5 +293,7 @@
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label LblFoto;
     }
 }

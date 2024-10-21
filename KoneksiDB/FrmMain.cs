@@ -221,6 +221,19 @@ namespace KoneksiDB
             frmPengguna.Show();
         }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox1.Image = Image.FromFile(openFileDialog1.FileName);
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+            LblFoto.Visible = false;
+        }
+
         private void FrmMain_Load(object sender, EventArgs e)
         {
             try
